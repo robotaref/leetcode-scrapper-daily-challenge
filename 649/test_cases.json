@@ -1,0 +1,20 @@
+{
+  "example1": {
+    "input": {
+      "senate" : "RD"
+    },
+    "output": "Radiant"
+  },
+    "example2": {
+    "input": {
+      "senate" : "RDD"
+    },
+    "output": "Dire"
+  },
+    "example3": {
+      "input": {
+        "senate": "DDRRR"
+      },
+      "output": "Dire"
+    }
+}

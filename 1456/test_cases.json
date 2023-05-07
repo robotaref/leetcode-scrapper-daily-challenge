@@ -1,0 +1,30 @@
+{
+  "example4": {
+    "input": {
+      "s": "weallloveyou",
+      "k": 7
+    },
+    "output": 4
+  },
+  "example1": {
+    "input": {
+      "s": "abciiidef",
+      "k": 3
+    },
+    "output": 3
+  },
+  "example3": {
+    "input": {
+      "s": "aeiou",
+      "k": 2
+    },
+    "output": 2
+  },
+  "example2": {
+    "input": {
+      "s": "leetcode",
+      "k": 3
+    },
+    "output": 2
+  }
+}

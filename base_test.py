@@ -18,15 +18,17 @@ class BaseSolutionTest(unittest.TestCase):
     solution_class = None
     example_files: str = None
 
-    def __init__(self, solution_class, example_files="test_cases.json"):
+    def __init__(self, solution_class, example_files="test_cases.json", used_tests=None):
         super().__init__()
+        self.used_tests = used_tests
         self.solution_class = solution_class
         self.test_cases = self.read_test_cases(example_files)
         self.test_examples()
 
     def test_examples(self):
-        for test_case in self.test_cases:
-            self.assert_test_case(test_case)
+        for i,test_case in enumerate(self.test_cases):
+            if self.used_tests is None or i in self.used_tests:
+                self.assert_test_case(test_case)
 
     def assert_test_case(self, test_case):
         print(test_case)

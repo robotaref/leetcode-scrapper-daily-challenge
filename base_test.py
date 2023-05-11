@@ -26,7 +26,7 @@ class BaseSolutionTest(unittest.TestCase):
         self.test_examples()
 
     def test_examples(self):
-        for i,test_case in enumerate(self.test_cases):
+        for i, test_case in enumerate(self.test_cases):
             if self.used_tests is None or i in self.used_tests:
                 self.assert_test_case(test_case)
 

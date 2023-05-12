@@ -21,7 +21,7 @@ class BaseSolutionTest(unittest.TestCase):
     def __init__(self, solution_class, example_files="test_cases.json", used_tests=None):
         super().__init__()
         self.used_tests = used_tests
-        self.solution_class = solution_class
+        self.solution_class = solution_class()
         self.test_cases = self.read_test_cases(example_files)
         self.test_examples()
 

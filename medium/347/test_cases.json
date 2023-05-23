@@ -1,0 +1,16 @@
+{
+  "example1": {
+    "input": {
+      "nums": [1,1,1,2,2,3],
+      "k": 2
+    },
+    "output": [1,2]
+  },
+  "example2": {
+    "input": {
+      "nums": [1],
+      "k": 1
+    },
+    "output": [1]
+  }
+}

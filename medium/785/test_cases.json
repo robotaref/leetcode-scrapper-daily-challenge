@@ -1,0 +1,32 @@
+{
+  "example1": {
+    "input": {
+      "graph": [[1,2,3],[0,2],[0,1,3],[0,2]]
+    },
+    "output": false
+  },
+    "example2": {
+    "input": {
+      "graph" : [[1,3],[0,2],[1,3],[0,2]]
+    },
+    "output": true
+  },
+    "example3": {
+      "input": {
+        "graph": [[4,1],[0,2],[1,3],[2,4],[3,0]]
+      },
+      "output": false
+    },
+    "example4": {
+      "input": {
+        "graph": [[3],[2,4],[1],[0,4],[1,3]]
+      },
+      "output": true
+    },
+    "example5": {
+      "input": {
+        "graph": [[4],[],[4],[4],[0,2,3]]
+      },
+      "output": true
+    }
+}

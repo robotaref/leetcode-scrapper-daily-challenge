@@ -1,0 +1,23 @@
+{
+  "example0": {
+    "input": {
+      "n" : 1,
+      "edges": []
+    },
+    "output": [0]
+  },
+    "example1": {
+    "input": {
+      "n" : 2,
+      "edges": [[0,1]]
+    },
+    "output": [0]
+  },
+  "example2": {
+    "input": {
+      "n" : 6,
+      "edges": [[0,1],[0,2],[2,5],[3,4],[4,2]]
+    },
+    "output": [0,3]
+  }
+}

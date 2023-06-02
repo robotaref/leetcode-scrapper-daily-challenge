@@ -1,0 +1,7 @@
+{
+  "example1": {
+    "command":["ParkingSystem", "addCar", "addCar", "addCar", "addCar"],
+    "input": [[1, 1, 0], [1], [2], [3], [1]],
+    "output": [null, true, true, false, false]
+  }
+}

@@ -17,7 +17,7 @@ class CommandTestCase:
 class BaseCommandTest(unittest.TestCase):
     config_file = str
     command_class = None
-    example_files: str = None
+    example_files: str = ""
 
     def __init__(self, command, example_files="test_cases.json", used_tests=None):
         super().__init__()
@@ -34,18 +34,18 @@ class BaseCommandTest(unittest.TestCase):
 
     def assert_test_case(self, obj, test_case: CommandTestCase):
         print(test_case)
-
-        try:
-            for COMMAND, INPUT, OUTPUT in zip(test_case.command, test_case.inputs, test_case.outputs):
-                if COMMAND == self.command_class.__name__:
-                    obj = self.command_class(*INPUT)
+        for _command, _input, _output in zip(test_case.command, test_case.inputs, test_case.outputs):
+            try:
+                if _command == self.command_class.__name__:
+                    obj = self.command_class(*_input)
                 else:
-                    out = getattr(obj, COMMAND)(*INPUT)
-                    self.assertEqual(out, OUTPUT)
-            print("test passed")
-            return obj
-        except self.failureException as e:
-            print(repr(e))
+                    out = getattr(obj, _command)(*_input)
+                    self.assertEqual(out, _output)
+            except self.failureException as e:
+                print(f"command :{_command} failed for {_input}, {repr(e)}")
+                return
+        print("test passed")
+        return obj
 
     @staticmethod
     def read_test_cases(example_files: str) -> List[CommandTestCase]:

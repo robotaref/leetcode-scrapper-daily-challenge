@@ -10,13 +10,13 @@ The length of a clear path is the number of visited cells of this path.
  
 
 #### Example 1:
-
+![img.png](img.png)
 ```
 Input: grid = [[0,1],[1,0]]
 Output: 2
 ```
 #### Example 2:
-
+![img_1.png](img_1.png)
 ```
 Input: grid = [[0,0,0],[1,1,0],[1,1,0]]
 Output: 4

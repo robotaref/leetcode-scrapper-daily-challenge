@@ -1,3 +1,6 @@
+from command_test import BaseCommandTest
+
+
 class MyHashSet:
 
     def __init__(self):
@@ -20,4 +23,4 @@ class MyHashSet:
         return key in self.table[spot]
 
 
-BaseSolutionTest(Solution)
+BaseCommandTest(MyHashSet)

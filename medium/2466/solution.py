@@ -1,4 +1,4 @@
-from base_test import BaseSolutionTest
+from solution_test import BaseSolutionTest
 
 
 class Solution:

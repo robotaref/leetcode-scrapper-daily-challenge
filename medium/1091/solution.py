@@ -2,7 +2,7 @@ from collections import deque, defaultdict
 from functools import cache
 from typing import List
 
-from base_test import BaseSolutionTest
+from solution_test import BaseSolutionTest
 
 
 class Solution:

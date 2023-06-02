@@ -3,7 +3,7 @@ import unittest
 from typing import List, Any
 
 
-class TestCase:
+class SolutionTestCase:
     def __init__(self, name, inputs, outputs):
         self.name = name
         self.inputs = inputs
@@ -36,17 +36,17 @@ class BaseSolutionTest(unittest.TestCase):
         try:
             output = obj.main(**test_case.inputs)
             self.assertEqual(output, test_case.outputs)
-            print("ok")
+            print("test passed")
         except self.failureException as e:
             print(repr(e))
 
     @staticmethod
-    def read_test_cases(example_files: str) -> List[TestCase]:
+    def read_test_cases(example_files: str) -> List[SolutionTestCase]:
         f = open(example_files)
         data = json.load(f)
-        test_cases: List[TestCase] = []
+        test_cases: List[SolutionTestCase] = []
         for name, test_case in data.items():
-            test_cases.append(TestCase(name, test_case['input'], test_case['output']))
+            test_cases.append(SolutionTestCase(name, test_case['input'], test_case['output']))
         return test_cases
 
 

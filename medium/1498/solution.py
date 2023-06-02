@@ -1,7 +1,7 @@
 from collections import deque
 from typing import List
 
-from base_test import BaseSolutionTest
+from solution_test import BaseSolutionTest
 
 
 class Solution:

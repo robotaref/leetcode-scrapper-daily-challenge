@@ -3,7 +3,7 @@ import collections
 from bisect import bisect_right
 from typing import List
 
-from base_test import BaseSolutionTest
+from solution_test import BaseSolutionTest
 
 
 class Solution:

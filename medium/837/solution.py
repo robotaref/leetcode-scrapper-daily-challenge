@@ -1,6 +1,6 @@
 from functools import cache, lru_cache
 
-from base_test import BaseSolutionTest, ApproximateSolutionTest
+from solution_test import BaseSolutionTest, ApproximateSolutionTest
 
 
 class Solution:

@@ -1,0 +1,26 @@
+{
+  "aref-example0": {
+    "input": {
+      "piles" : [2,7]
+    },
+    "output": 9
+  },
+  "aref-example1": {
+    "input": {
+      "piles" : [2,7,3]
+    },
+    "output": 9
+  },
+  "example1": {
+    "input": {
+      "piles" : [2,7,9,4,4]
+    },
+    "output": 10
+  },
+  "example2": {
+    "input": {
+      "piles": [1,2,3,4,5,100]
+    },
+    "output": 104
+  }
+}

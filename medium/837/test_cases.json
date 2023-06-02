@@ -1,0 +1,34 @@
+{
+  "example1": {
+    "input": {
+      "n": 10,
+      "k": 1,
+      "maxPts": 10
+    },
+    "output": 1
+  },
+  "example2": {
+    "input": {
+      "n": 6,
+      "k": 1,
+      "maxPts": 10
+    },
+    "output": 0.6
+  },
+  "example3": {
+    "input": {
+      "n": 21,
+      "k": 17,
+      "maxPts": 10
+    },
+    "output": 0.73278
+  },
+  "example4": {
+    "input": {
+      "n": 9811,
+      "k": 8776,
+      "maxPts": 1096
+    },
+    "output": 0.73278
+  }
+}

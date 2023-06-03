@@ -1,8 +1,6 @@
-import collections
-from copy import deepcopy
 from typing import List
 
-from solution_test import BaseSolutionTest
+from testing.solution_test import BaseSolutionTest
 
 
 class Solution:

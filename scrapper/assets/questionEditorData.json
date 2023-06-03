@@ -1,0 +1,7 @@
+{
+  "query": "\n    query questionEditorData($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    questionId\n    questionFrontendId\n    codeSnippets {\n      lang\n      langSlug\n      code\n    }\n    envInfo\n    enableRunCode\n  }\n}\n    ",
+  "variables": {
+    "titleSlug": "detonate-the-maximum-bombs"
+  },
+  "operationName": "questionEditorData"
+}

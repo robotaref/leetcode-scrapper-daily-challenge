@@ -18,11 +18,11 @@ class BaseSolutionTest(unittest.TestCase):
     solution_class = None
     example_files: str = None
 
-    def __init__(self, solution_class, example_files="test_cases.json", used_tests=None):
+    def __init__(self, solution_class, example_file="test_cases.json", used_tests=None):
         super().__init__()
         self.used_tests = used_tests
         self.solution_class = solution_class
-        self.test_cases = self.read_test_cases(example_files)
+        self.test_cases = self.read_test_cases(example_file)
         self.test_examples()
 
     def test_examples(self):
@@ -53,9 +53,9 @@ class BaseSolutionTest(unittest.TestCase):
 class ApproximateSolutionTest(BaseSolutionTest):
     delta = float
 
-    def __init__(self, solution_class, example_files="test_cases.json", used_tests=None, delta=10e-5):
+    def __init__(self, solution_class, example_file="test_cases.json", used_tests=None, delta=10e-5):
         self.delta = delta
-        super().__init__(solution_class, example_files, used_tests)
+        super().__init__(solution_class, example_file, used_tests)
 
     def assertEqual(self, first: Any, second: Any, msg: Any = ...) -> None:
         return self.assertAlmostEqual(first, second, delta=self.delta)

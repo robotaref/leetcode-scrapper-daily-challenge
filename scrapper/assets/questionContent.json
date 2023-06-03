@@ -1,0 +1,7 @@
+{
+  "query": "\n    query questionContent($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    content\n    mysqlSchemas\n  }\n}\n    ",
+  "variables": {
+    "titleSlug": "detonate-the-maximum-bombs"
+  },
+  "operationName": "questionContent"
+}

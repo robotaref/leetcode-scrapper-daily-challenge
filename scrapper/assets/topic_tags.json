@@ -1,0 +1,7 @@
+{
+  "query": "\n    query singleQuestionTopicTags($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    topicTags {\n      name\n      slug\n    }\n  }\n}\n    ",
+  "variables": {
+    "titleSlug": "detonate-the-maximum-bombs"
+  },
+  "operationName": "singleQuestionTopicTags"
+}

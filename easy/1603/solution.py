@@ -1,4 +1,4 @@
-from command_test import BaseCommandTest
+from testing.command_test import BaseCommandTest
 
 
 class ParkingSystem:

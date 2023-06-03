@@ -1,7 +1,7 @@
 from collections import deque
 from typing import Optional
 
-from solution_test import BaseSolutionTest
+from testing.solution_test import BaseSolutionTest
 
 
 class ListNode:

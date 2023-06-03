@@ -1,0 +1,7 @@
+{
+  "query": "\n    query consolePanelConfig($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    questionId\n    questionFrontendId\n    questionTitle\n    enableDebugger\n    enableRunCode\n    enableSubmit\n    enableTestMode\n    exampleTestcaseList\n    metaData\n  }\n}\n    ",
+  "variables": {
+    "titleSlug": "detonate-the-maximum-bombs"
+  },
+  "operationName": "consolePanelConfig"
+}

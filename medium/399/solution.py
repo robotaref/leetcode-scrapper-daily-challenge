@@ -1,7 +1,7 @@
 import collections
 from typing import List, Set
 
-from solution_test import BaseSolutionTest
+from testing.solution_test import BaseSolutionTest
 
 
 class Solution:

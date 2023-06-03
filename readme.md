@@ -7,7 +7,7 @@ _IMPORTANT NOTICE_: some codes are gathered from internet and not all of them ar
 First, install requirements:
 
 ```shell
-pip install -r requirements-dev.txt -U 
+pip install -r requirements.txt -U 
 ```
 
 To get any question, with problem and description, use download command.

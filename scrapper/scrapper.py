@@ -38,7 +38,7 @@ class QuestionScrapper(Scrapper):
 
     def __init__(self, question_name):
         self.question_name = question_name
-        self.imports_text = "from solution_test import BaseSolutionTest\n\n\n"
+        self.imports_text = "from testing.solution_test import BaseSolutionTest\n\n\n"
         self.base_editor_text = """\n\tdef __init__(self):\n\t\tself.main = self.{function_name}\n"""
         self.base_test_text = """\n\nBaseSolutionTest(Solution, )\n"""
 

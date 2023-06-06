@@ -1,3 +1,4 @@
+from collections import defaultdict
 from functools import cache
 from typing import List
 
@@ -9,6 +10,7 @@ class Solution:
         self.main = self.maximumDetonation
         self.bombs = []
         self.detonated = []
+        self.adj_bombs = defaultdict(list)
 
     @cache
     def get_distance(self, i, j):
@@ -17,16 +19,19 @@ class Solution:
     def detonate_bomb(self, i):
         self.detonated[i] = True
         s = 1
-        for j, bomb in enumerate(self.bombs):
+        for j in (self.adj_bombs[i]):
             if not self.detonated[j]:
-                if self.get_distance(min(i, j), max(i, j)) <= self.bombs[i][2] ** 2:
-                    s += self.detonate_bomb(j)
+                s += self.detonate_bomb(j)
         return s
 
     def maximumDetonation(self, bombs: List[List[int]]) -> int:
         n = len(bombs)
         self.bombs = bombs
-
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    if self.get_distance(min(i, j), max(i, j)) <= self.bombs[i][2] ** 2:
+                        self.adj_bombs[i].append(j)
         s = 0
         for i in range(n):
             self.detonated = [False] * n

@@ -40,7 +40,7 @@ class QuestionScrapper(Scrapper):
         self.question_name = question_name
         self.imports_text = "from testing.solution_test import BaseSolutionTest\n\n\n"
         self.base_editor_text = """\n\tdef __init__(self):\n\t\tself.main = self.{function_name}\n"""
-        self.base_test_text = """\n\nBaseSolutionTest(Solution, )\n"""
+        self.base_test_text = """return\n\n\nBaseSolutionTest(Solution, )\n"""
 
     def get_from_api(self, data_file_name):
         data = self.open_json(data_file_name)
@@ -75,10 +75,19 @@ class QuestionScrapper(Scrapper):
             case_split = case.split("\n")
             for j, param in enumerate(method_meta_data["params"]):
                 t[param["name"]] = ast.literal_eval(case_split[j])
-
-            inputs[f"question_{i + 1}"] = {"input": t, "output": ast.literal_eval(self.question.outputs[i])}
-
+            try:
+                inputs[f"question_{i + 1}"] = {"input": t, "output": self.parse_output(self.question.outputs[i])}
+            except ValueError as e:
+                print(f"'{self.question.outputs[i]}' can't be parsed with error {repr(e)}")
         self.question.set_inputs(inputs)
+
+    @staticmethod
+    def parse_output(output: str):
+        if output == "true":
+            return True
+        if output == "false":
+            return False
+        return ast.literal_eval(output)
 
     def get_question_editor_data(self):
         res = self.get_from_api("questionEditorData")

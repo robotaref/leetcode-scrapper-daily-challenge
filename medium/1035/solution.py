@@ -6,9 +6,6 @@ from testing.solution_test import BaseSolutionTest
 
 class Solution:
 
-    def __init__(self):
-        self.main = self.maxUncrossedLines
-
     def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
         N1 = len(nums1)
         N2 = len(nums2)
@@ -26,4 +23,10 @@ class Solution:
         return calculateMax(0, 0)
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.maxUncrossedLines
+
+
+BaseSolutionTest(TestableSolution)

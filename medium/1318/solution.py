@@ -2,8 +2,6 @@ from testing.solution_test import BaseSolutionTest
 
 
 class Solution:
-    def __init__(self):
-        self.main = self.minFlips
 
     def minFlips(self, a: int, b: int, c: int) -> int:
         n = 0
@@ -24,4 +22,10 @@ class Solution:
         return n
 
 
-BaseSolutionTest(Solution, )
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.minFlips
+
+
+BaseSolutionTest(TestableSolution)

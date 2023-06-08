@@ -2,6 +2,8 @@ import json
 import unittest
 from typing import List, Any
 
+import numpy.testing
+
 
 class SolutionTestCase:
     def __init__(self, name, inputs, outputs):
@@ -51,11 +53,11 @@ class BaseSolutionTest(unittest.TestCase):
 
 
 class ApproximateSolutionTest(BaseSolutionTest):
-    delta = float
+    decimal = int
 
-    def __init__(self, solution_class, example_file="test_cases.json", used_tests=None, delta=10e-5):
-        self.delta = delta
+    def __init__(self, solution_class, example_file="test_cases.json", used_tests=None, decimal=5):
+        self.decimal = decimal
         super().__init__(solution_class, example_file, used_tests)
 
     def assertEqual(self, first: Any, second: Any, msg: Any = ...) -> None:
-        return self.assertAlmostEqual(first, second, delta=self.delta)
+        return numpy.testing.assert_almost_equal(first, second, decimal=self.decimal, )

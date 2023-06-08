@@ -5,9 +5,6 @@ from testing.solution_test import BaseSolutionTest
 
 class Solution:
 
-    def __init__(self):
-        self.main = self.generateMatrix
-
     def generateMatrix(self, n: int) -> List[List[int]]:
         up = 1
         right = 1
@@ -46,4 +43,9 @@ class Solution:
         return matrix
 
 
-BaseSolutionTest(Solution(), used_tests=[1])
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.generateMatrix
+
+
+BaseSolutionTest(TestableSolution)

@@ -7,7 +7,6 @@ from testing.solution_test import BaseSolutionTest
 class Solution:
 
     def __init__(self):
-        self.main = self.mostPoints
         self.questions = []
 
     @cache
@@ -23,4 +22,10 @@ class Solution:
         return self.getBest(0)
 
 
-BaseSolutionTest(Solution, used_tests=[1])
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.mostPoints
+
+
+BaseSolutionTest(TestableSolution)

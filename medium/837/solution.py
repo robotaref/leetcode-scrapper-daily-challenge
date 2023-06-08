@@ -6,7 +6,6 @@ from testing.solution_test import ApproximateSolutionTest
 class Solution:
 
     def __init__(self):
-        self.main = self.new21Game
         self.n = 0
         self.k = 0
         self.maxPts = 0
@@ -30,4 +29,10 @@ class Solution:
         return self.get_probability(max(0, self.k - self.maxPts))
 
 
-ApproximateSolutionTest(Solution)
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.new21Game
+
+
+ApproximateSolutionTest(TestableSolution)

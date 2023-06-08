@@ -5,9 +5,6 @@ from testing.solution_test import BaseSolutionTest
 
 class Solution:
 
-    def __init__(self):
-        self.main = self.spiralOrder
-
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         m = len(matrix)
         n = len(matrix[0])
@@ -45,4 +42,9 @@ class Solution:
         return answer
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.spiralOrder
+
+
+BaseSolutionTest(TestableSolution)

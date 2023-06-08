@@ -4,9 +4,6 @@ from testing.solution_test import BaseSolutionTest
 
 
 class Solution:
-    def __init__(self):
-
-        self.main = self.arraySign
 
     @staticmethod
     def arraySign(nums: List[int]) -> int:
@@ -22,4 +19,9 @@ class Solution:
         return -1
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.arraySign
+
+
+BaseSolutionTest(TestableSolution)

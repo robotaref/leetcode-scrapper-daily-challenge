@@ -39,8 +39,10 @@ class QuestionScrapper(Scrapper):
     def __init__(self, question_name):
         self.question_name = question_name
         self.imports_text = "from testing.solution_test import BaseSolutionTest\n\n\n"
-        self.base_editor_text = """\n\tdef __init__(self):\n\t\tself.main = self.{function_name}\n"""
-        self.base_test_text = """return\n\n\nBaseSolutionTest(Solution, )\n"""
+        self.base_editor_text = "return\n\n\nclass TestableSolution(Solution):" + \
+                                "\n\tdef __init__(self):\n\t\tsuper().__init__()\n\t\t" \
+                                "self.main = self.{function_name}\n"
+        self.base_test_text = """\n\nBaseSolutionTest(TestableSolution, )\n"""
 
     def get_from_api(self, data_file_name):
         data = self.open_json(data_file_name)
@@ -95,9 +97,8 @@ class QuestionScrapper(Scrapper):
         for row in (res["codeSnippets"]):
             if row["lang"] == "Python3":
                 editor_data = row["code"].replace("    ", "\t")
-                main_position = editor_data.find("class Solution:") + len("class Solution:")
-                editor_data = self.imports_text + editor_data[:main_position] + self.base_editor_text.format(
-                    function_name=self.question.main_method) + editor_data[main_position:] + self.base_test_text
+                editor_data = self.imports_text + editor_data + self.base_editor_text.format(
+                    function_name=self.question.main_method) + self.base_test_text
                 self.question.set_editor_data(editor_data)
 
     def make_files(self):

@@ -5,8 +5,6 @@ from testing.solution_test import BaseSolutionTest
 
 
 class Solution:
-    def __init__(self):
-        self.main = self.numOfMinutes
 
     def numOfMinutes(self, n: int, headID: int, manager: List[int], informTime: List[int]) -> int:
         graph = defaultdict(list)
@@ -25,4 +23,10 @@ class Solution:
         return get_time(headID)
 
 
-BaseSolutionTest(Solution, )
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.numOfMinutes
+
+
+BaseSolutionTest(TestableSolution)

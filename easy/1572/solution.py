@@ -4,8 +4,6 @@ from testing.solution_test import BaseSolutionTest
 
 
 class Solution:
-    def __init__(self):
-        self.main = self.diagonalSum
 
     def diagonalSum(self, mat: List[List[int]]) -> int:
         n = len(mat)
@@ -16,4 +14,9 @@ class Solution:
         return d1
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.diagonalSum
+
+
+BaseSolutionTest(TestableSolution)

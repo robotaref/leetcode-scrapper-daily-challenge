@@ -8,9 +8,6 @@ class Solution:
     modul = (10 ** 9 + 7)
     two_powers = {0: 1}
 
-    def __init__(self):
-        self.main = self.numSubseq
-
     def numSubseq(self, nums: List[int], target: int) -> int:
         nums = self.filter_larger_than_target(nums, target)
         nums.sort()
@@ -32,4 +29,10 @@ class Solution:
         return [n for n in nums if n < target]
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.numSubseq
+
+
+BaseSolutionTest(TestableSolution)

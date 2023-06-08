@@ -4,8 +4,6 @@ from testing.solution_test import BaseSolutionTest
 
 
 class Solution:
-    def __init__(self):
-        self.main = self.checkStraightLine
 
     def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
         x0, y0 = coordinates[0]
@@ -27,4 +25,9 @@ class Solution:
         return True
 
 
-BaseSolutionTest(Solution, )
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.checkStraightLine
+
+
+BaseSolutionTest(TestableSolution, )

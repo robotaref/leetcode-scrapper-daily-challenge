@@ -12,7 +12,6 @@ class Solution:
             for j in range(-1, 2):
                 if i != 0 or j != 0:
                     self.actions.append((i, j))
-        self.main = self.shortestPathBinaryMatrix
 
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
         n = len(grid)
@@ -36,4 +35,10 @@ class Solution:
         return -1
 
 
-BaseSolutionTest(Solution)
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.shortestPathBinaryMatrix
+
+
+BaseSolutionTest(TestableSolution)

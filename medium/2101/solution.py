@@ -7,7 +7,6 @@ from testing.solution_test import BaseSolutionTest
 
 class Solution:
     def __init__(self):
-        self.main = self.maximumDetonation
         self.bombs = []
         self.detonated = []
         self.adj_bombs = defaultdict(list)
@@ -39,4 +38,10 @@ class Solution:
         return s
 
 
-BaseSolutionTest(Solution, )
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.maximumDetonation
+
+
+BaseSolutionTest(TestableSolution)

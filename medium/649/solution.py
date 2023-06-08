@@ -7,9 +7,6 @@ class Solution:
     opponent = {}
     answers = {"R": "Radiant", "D": "Dire"}
 
-    def __init__(self):
-        self.main = self.predictPartyVictoryV2
-
     @staticmethod
     def game_still_on(senate):
         if len(senate) == 1:
@@ -32,14 +29,10 @@ class Solution:
 
     @staticmethod
     def predictPartyVictoryV2(senate):
-        """
-        :type senate: str
-        :rtype: str
-        """
+
         n = len(senate)
         qr = collections.deque([i for i, c in enumerate(senate) if c == "R"])
         qd = collections.deque([i for i, c in enumerate(senate) if c == "D"])
-        print('here')
         while qr and qd:
             if qr[0] < qd[0]:
                 qd.popleft()
@@ -50,4 +43,10 @@ class Solution:
         return "Radiant" if qr else "Dire"
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.predictPartyVictoryV2
+
+
+BaseSolutionTest(TestableSolution)

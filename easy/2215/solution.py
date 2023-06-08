@@ -4,8 +4,6 @@ from testing.solution_test import BaseSolutionTest
 
 
 class Solution:
-    def __init__(self):
-        self.main = self.findDifference
 
     @staticmethod
     def findDifference(nums1: List[int], nums2: List[int]) -> List[List[int]]:
@@ -20,4 +18,9 @@ class Solution:
         return [list(nums1 - nums2), list(nums2 - nums1)]
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.findDifference
+
+
+BaseSolutionTest(TestableSolution)

@@ -4,8 +4,6 @@ from testing.solution_test import BaseSolutionTest
 
 
 class Solution:
-    def __init__(self):
-        self.main = self.average
 
     @staticmethod
     def average(salary: List[int]) -> float:
@@ -15,4 +13,9 @@ class Solution:
         return sum(r_salary) / len(r_salary)
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.average
+
+
+BaseSolutionTest(TestableSolution)

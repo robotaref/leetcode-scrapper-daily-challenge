@@ -5,9 +5,6 @@ from testing.solution_test import BaseSolutionTest
 
 class Solution:
 
-    def __init__(self):
-        self.main = self.findSmallestSetOfVertices
-
     def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
         start_nodes, end_nodes = [], []
         for x, y in edges:
@@ -18,4 +15,10 @@ class Solution:
         return list(start_nodes - end_nodes)
 
 
-BaseSolutionTest(Solution, )
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.findSmallestSetOfVertices
+
+
+BaseSolutionTest(TestableSolution)

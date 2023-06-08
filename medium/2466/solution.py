@@ -3,9 +3,6 @@ from testing.solution_test import BaseSolutionTest
 
 class Solution:
 
-    def __init__(self):
-        self.main = self.countGoodStrings
-
     def countGoodStrings(self, low: int, high: int, zero: int, one: int) -> int:
         kMod = 1_000_000_007
         ans = 0
@@ -20,4 +17,10 @@ class Solution:
         return ans
 
 
-BaseSolutionTest(Solution, )
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.countGoodStrings
+
+
+BaseSolutionTest(TestableSolution)

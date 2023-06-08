@@ -7,9 +7,6 @@ from testing.solution_test import BaseSolutionTest
 
 class Solution:
 
-    def __init__(self):
-        self.main = self.maxScore
-
     def maxScore(self, nums: List[int]) -> int:
         n = len(nums)
         dp = [-1] * (1 << n)
@@ -34,4 +31,9 @@ class Solution:
         return dfs(0, 1)
 
 
-BaseSolutionTest(Solution,)
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.maxScore
+
+
+BaseSolutionTest(TestableSolution)

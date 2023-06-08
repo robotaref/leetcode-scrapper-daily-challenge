@@ -11,8 +11,6 @@ class ListNode:
 
 
 class Solution:
-    def __init__(self):
-        self.main = self.pairSum
 
     def pairSum(self, head: Optional[ListNode]) -> int:
         q = deque()
@@ -31,4 +29,10 @@ class Solution:
         return m
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.pairSum
+
+
+BaseSolutionTest(TestableSolution)

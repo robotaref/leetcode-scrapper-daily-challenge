@@ -1,16 +1,12 @@
 import collections
 from typing import List, Set
 
-from testing.solution_test import BaseSolutionTest
+from testing.solution_test import BaseSolutionTest, ApproximateSolutionTest
 
 
 class Solution:
 
-    def __init__(self):
-        self.main = self.calcEquation
-
-    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[
-        float]:
+    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
         ans = []
         graph = collections.defaultdict(dict)
 
@@ -42,4 +38,9 @@ class Solution:
         return ans
 
 
-BaseSolutionTest(Solution,)
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.calcEquation
+
+
+ApproximateSolutionTest(TestableSolution)

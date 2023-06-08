@@ -5,7 +5,6 @@ class Solution:
 
     def __init__(self):
         self.vowels = ['a', 'e', 'i', 'o', 'u']
-        self.main = self.maxVowels
 
     def maxVowels(self, s: str, k: int) -> int:
         left = 0
@@ -31,4 +30,10 @@ class Solution:
         return cnt
 
 
-BaseSolutionTest(Solution())
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.maxVowels
+
+
+BaseSolutionTest(TestableSolution)

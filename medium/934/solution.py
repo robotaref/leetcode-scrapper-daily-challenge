@@ -6,7 +6,6 @@ from testing.solution_test import BaseSolutionTest
 class Solution:
 
     def __init__(self):
-        self.main = self.shortestBridge
         self.is_seen = []
         self.bfs_is_seen = []
         self.color = []
@@ -55,4 +54,10 @@ class Solution:
         return l
 
 
-BaseSolutionTest(Solution)
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.shortestBridge
+
+
+BaseSolutionTest(TestableSolution)

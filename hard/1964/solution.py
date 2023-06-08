@@ -6,17 +6,11 @@ from testing.solution_test import BaseSolutionTest
 
 class Solution:
 
-    def __init__(self):
-        self.main = self.longestObstacleCourseAtEachPosition
-
     def longestObstacleCourseAtEachPosition(self, obstacles: List[int]) -> List[int]:
         ans = []
-        # tail[i] := the minimum tail of all increasing subseqs having length i + 1
-        # it's easy to see that tail must be an increasing array
         tail = []
 
         for obstacle in obstacles:
-            print(tail,)
             if not tail or obstacle >= tail[-1]:
                 tail.append(obstacle)
                 ans.append(len(tail))
@@ -28,4 +22,9 @@ class Solution:
         return ans
 
 
-BaseSolutionTest(Solution(),)
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.longestObstacleCourseAtEachPosition
+
+
+BaseSolutionTest(TestableSolution)

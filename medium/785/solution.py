@@ -7,9 +7,6 @@ class Solution:
     opponent = {}
     answers = {"R": "Radiant", "D": "Dire"}
 
-    def __init__(self):
-        self.main = self.isBipartite
-
     def isBipartite(self, graph: List[List[int]]) -> bool:
         n = len(graph)
         color_map = {}
@@ -33,4 +30,10 @@ class Solution:
         return True
 
 
-BaseSolutionTest(Solution)
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.isBipartite
+
+
+BaseSolutionTest(TestableSolution)

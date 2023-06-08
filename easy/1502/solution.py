@@ -4,8 +4,6 @@ from testing.solution_test import BaseSolutionTest
 
 
 class Solution:
-    def __init__(self):
-        self.main = self.canMakeArithmeticProgression
 
     def canMakeArithmeticProgression(self, arr: List[int]) -> bool:
         n = len(arr)
@@ -16,4 +14,9 @@ class Solution:
         return True
 
 
-BaseSolutionTest(Solution, )
+class TestableSolution(Solution):
+    def __init__(self):
+        self.main = self.canMakeArithmeticProgression
+
+
+BaseSolutionTest(TestableSolution, )

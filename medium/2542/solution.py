@@ -7,7 +7,6 @@ from testing.solution_test import BaseSolutionTest
 class Solution:
 
     def __init__(self):
-        self.main = self.maxScore
         self.questions = []
 
     def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
@@ -28,4 +27,10 @@ class Solution:
         return m
 
 
-BaseSolutionTest(Solution, )
+class TestableSolution(Solution):
+    def __init__(self):
+        super().__init__()
+        self.main = self.maxScore
+
+
+BaseSolutionTest(TestableSolution)

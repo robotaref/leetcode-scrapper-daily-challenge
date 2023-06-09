@@ -1,0 +1,36 @@
+{
+  "question_1": {
+    "input": {
+      "letters": [
+        "c",
+        "f",
+        "j"
+      ],
+      "target": "a"
+    },
+    "output": "c"
+  },
+  "question_2": {
+    "input": {
+      "letters": [
+        "c",
+        "f",
+        "j"
+      ],
+      "target": "c"
+    },
+    "output": "f"
+  },
+  "question_3": {
+    "input": {
+      "letters": [
+        "x",
+        "x",
+        "y",
+        "y"
+      ],
+      "target": "z"
+    },
+    "output": "x"
+  }
+}

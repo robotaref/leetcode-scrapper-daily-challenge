@@ -89,7 +89,12 @@ class QuestionScrapper(Scrapper):
             return True
         if output == "false":
             return False
-        return ast.literal_eval(output)
+        output = output.replace("&quot;", '"')
+        try:
+            return ast.literal_eval(output)
+        except Exception as e:
+            print(f"could not parse output {output}, error: {repr(e)}")
+            return output
 
     def get_question_editor_data(self):
         res = self.get_from_api("questionEditorData")

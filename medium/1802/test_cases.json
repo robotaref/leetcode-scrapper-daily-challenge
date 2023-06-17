@@ -1,0 +1,41 @@
+{
+  "question_1": {
+    "input": {
+      "n": 4,
+      "index": 2,
+      "maxSum": 6
+    },
+    "output": 2
+  },
+  "question_2": {
+    "input": {
+      "n": 6,
+      "index": 1,
+      "maxSum": 10
+    },
+    "output": 3
+  },
+  "question_3": {
+    "input": {
+      "n": 9,
+      "index": 3,
+      "maxSum": 16
+    },
+    "output": 3
+  },
+  "question_4": {
+    "input": {
+      "n": 5,
+      "index": 0,
+      "maxSum": 28
+    },
+    "output": 7
+  }, "question_5": {
+    "input": {
+      "n": 3,
+      "index": 2,
+      "maxSum": 18
+    },
+    "output": 7
+  }
+}

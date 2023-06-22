@@ -67,16 +67,22 @@ class QuestionScrapper(Scrapper):
     def get_console_panel_config(self):
         res = self.get_from_api("consolePanelConfig")
         method_meta_data = json.loads(res["metaData"])
+        try:
 
-        self.question.set_main_method_name(method_meta_data["name"])
+            name_ = method_meta_data["name"]
+        except:
+            name_ = "test"
+        self.question.set_main_method_name(name_)
 
         example_testcase_list_ = res["exampleTestcaseList"]
+        print(method_meta_data)
+        print(example_testcase_list_)
         inputs = {}
         for i, case in enumerate(example_testcase_list_):
             t = {}
             case_split = case.split("\n")
             for j, param in enumerate(method_meta_data["params"]):
-                t[param["name"]] = ast.literal_eval(case_split[j])
+                t[param["name"]] = ast.literal_eval(case_split[j].replace("null", "None"))
             try:
                 inputs[f"question_{i + 1}"] = {"input": t, "output": self.parse_output(self.question.outputs[i])}
             except ValueError as e:

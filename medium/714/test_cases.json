@@ -1,0 +1,1 @@
+{"question_1": {"input": {"prices": [1, 3, 2, 8, 4, 9], "fee": 2}, "output": 8}, "question_2": {"input": {"prices": [1, 3, 7, 5, 10, 3], "fee": 3}, "output": 6}}

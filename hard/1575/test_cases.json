@@ -1,0 +1,1 @@
+{"question_1": {"input": {"locations": [2, 3, 6, 8, 4], "start": 1, "finish": 3, "fuel": 5}, "output": 4}, "question_2": {"input": {"locations": [4, 3, 1], "start": 1, "finish": 0, "fuel": 6}, "output": 5}, "question_3": {"input": {"locations": [5, 2, 1], "start": 0, "finish": 2, "fuel": 3}, "output": 0}}

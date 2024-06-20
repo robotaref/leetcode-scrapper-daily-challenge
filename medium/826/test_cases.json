@@ -1,0 +1,47 @@
+{
+  "question_1": {
+    "input": {
+      "difficulty": [
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "profit": [
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "worker": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "output": 100
+  },
+  "question_2": {
+    "input": {
+      "difficulty": [
+        85,
+        47,
+        57
+      ],
+      "profit": [
+        24,
+        66,
+        99
+      ],
+      "worker": [
+        40,
+        25,
+        25
+      ]
+    },
+    "output": 0
+  }
+}

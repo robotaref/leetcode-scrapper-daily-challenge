@@ -1,0 +1,50 @@
+{
+  "question_1": {
+    "input": {
+      "customers": [
+        1,
+        0,
+        1,
+        2,
+        1,
+        1,
+        7,
+        5
+      ],
+      "grumpy": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "minutes": 3
+    },
+    "output": 16
+  },
+  "question_2": {
+    "input": {
+      "customers": [
+        1
+      ],
+      "grumpy": [
+        0
+      ],
+      "minutes": 1
+    },
+    "output": 1
+  },
+  "question_3": {
+    "input": {
+      "customers": [4,10,10]
+,
+      "grumpy": [1,1,0]
+,
+      "minutes": 2
+    },
+    "output": 24
+  }
+}

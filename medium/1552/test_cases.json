@@ -1,0 +1,36 @@
+{
+  "question_1": {
+    "input": {
+      "position": [
+        1,
+        2,
+        3,
+        4,
+        7
+      ],
+      "m": 3
+    },
+    "output": 3
+  },
+  "question_2": {
+    "input": {
+      "position": [
+        5,
+        4,
+        3,
+        2,
+        1,
+        1000000000
+      ],
+      "m": 2
+    },
+    "output": 999999999
+  },
+  "question_3": {
+    "input": {
+      "position": [79,74,57,22],
+      "m": 4
+    },
+    "output": 5
+  }
+}

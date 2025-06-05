@@ -1,0 +1,1 @@
+{"question_1": {"input": {"grid": [[1, 0], [0, 1]]}, "output": 0}, "question_2": {"input": {"grid": [[1, 0], [1, 1]]}, "output": 3}, "question_3": {"input": {"grid": [[1, 1, 0, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 0, 1]]}, "output": 4}}

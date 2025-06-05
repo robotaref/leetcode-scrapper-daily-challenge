@@ -13,13 +13,21 @@ pip install -r requirements.txt -U
 To get any question, with problem and description, use download command.
 
 ```shell
-python main.py -d True 
+python main.py -d
+```
+or
+```shell
+python main.py --daily
 ```
 
 and to get any other, use:
 
 ```shell
 python main.py -s `QUESTION_SLUG`
+```
+or
+```shell
+python main.py --slug `QUESTION_SLUG`
 ```
 
 `QUESTION_SLUG` can be extracted from any problem url, which looks like this:

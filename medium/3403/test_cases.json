@@ -1,0 +1,1 @@
+{"question_1": {"input": {"word": "dbca", "numFriends": 2}, "output": "dbc"}, "question_2": {"input": {"word": "gggg", "numFriends": 4}, "output": "g"}}

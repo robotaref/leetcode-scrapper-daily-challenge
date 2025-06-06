@@ -71,7 +71,6 @@ class Scrapper:
 
     @staticmethod
     def str2dataframe(table_text: str) -> pd.DataFrame:
-        # ── 1. Keep only lines that actually contain data ────────────────────────
         data_lines = [
             line for line in table_text.strip().splitlines()
             if '|' in line and not line.lstrip().startswith('+')
@@ -80,7 +79,6 @@ class Scrapper:
         if not data_lines:
             raise ValueError("No table rows detected – check the input string.")
 
-        # ── 2. Read the table with pandas, using “|” as the field separator ──────
         csv_like = "\n".join(data_lines)
         df = pd.read_csv(
             StringIO(csv_like),
@@ -89,11 +87,11 @@ class Scrapper:
             skipinitialspace=True  # trim spaces after each “|”
         )
 
-        # ── 3. Drop the blank columns created by the left/right borders ──────────
         df = df.loc[:, df.columns.str.strip() != ""]  # drop leading |
         df = df.loc[:, ~df.columns.str.startswith("Unnamed")]  # drop trailing |
+        df.columns = df.columns.str.strip()
+        df = df.apply(lambda col: col.str.strip() if col.dtype == "object" else col)
 
-        # ── 4. Normalise missing-value markers to plain None ─────────────────────
         null_tokens = {"null", "Null", "<NA>", "<na>", "NaN", "nan"}
         df = df.replace({tok: None for tok in null_tokens})  # literal strings
         df = df.where(df.notna(), None)  # actual NaN/NA
@@ -117,13 +115,12 @@ class Scrapper:
                 )
 
             df = pd.DataFrame(table_rows, columns=cols)
+            df.columns = df.columns.str.strip()
+            df = df.apply(lambda col: col.str.strip() if col.dtype == "object" else col)
 
-            # Normalise common textual null tokens to real None/NA
-            df.replace(
-                {"null": None, "Null": None, "<NA>": None, "NaN": None, "nan": None},
-                inplace=True,
-            )
-            df = df.where(df.notna(), None)
+            null_tokens = {"null", "Null", "<NA>", "<na>", "NaN", "nan"}
+            df = df.replace({tok: None for tok in null_tokens})  # literal strings
+            df = df.where(df.notna(), None)  # actual NaN/NA
 
             dfs[table_name.lower()] = df
 
@@ -283,7 +280,7 @@ class QuestionScrapper(Scrapper):
                         params[param] = self.question.inputs[item]["input"][param].to_json()
                     to_dump[item] = {"input": params, "output": self.question.inputs[item]["output"].to_json()}
 
-                json.dump(to_dump, f)
+                json.dump(to_dump, f, separators=(',', ':'))
             else:
                 json.dump(self.question.inputs, f)
 

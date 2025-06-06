@@ -4,6 +4,7 @@ import unittest
 from typing import List, Any
 
 import numpy.testing
+import numpy as np
 import pandas as pd
 
 
@@ -31,6 +32,13 @@ class BaseSolutionTest(unittest.TestCase):
         self.test_cases = self.read_test_cases(example_file)
         self.test_examples()
 
+    @staticmethod
+    def read_tags() -> list:
+        with open("readme.md", encoding="utf-8") as f:
+            text = f.read()
+            tags = text.splitlines()[-1]
+        return ast.literal_eval(tags)
+
     def test_examples(self):
         for i, test_case in enumerate(self.test_cases):
             obj = self.solution_class()
@@ -41,7 +49,16 @@ class BaseSolutionTest(unittest.TestCase):
         print(test_case)
         try:
             output = obj.main(**test_case.inputs)
-            self.assertEqual(output, test_case.outputs)
+            if "database" in self.question_tags:
+                pd.testing.assert_frame_equal(
+                    output.replace(np.NaN, None).sort_index(axis=1).reset_index(drop=True),
+                    test_case.outputs.replace(np.NaN, None).sort_index(axis=1).reset_index(drop=True),
+                    check_dtype=False,
+                    check_index_type=False,
+                    check_exact=False,
+                    check_column_type=False)
+            else:
+                self.assertEqual(output, test_case.outputs)
             print("test passed")
         except self.failureException as e:
             print(repr(e))
@@ -55,19 +72,12 @@ class BaseSolutionTest(unittest.TestCase):
             if "database" in self.question_tags:
                 inputs = {}
                 for param, value in test_case["input"].items():
-                    inputs[param] = pd.DataFrame(json.loads(value))
+                    inputs[param] = pd.DataFrame(json.loads(value, ))
                 output = pd.DataFrame(json.loads(test_case["output"]))
                 test_cases.append(SolutionTestCase(name, inputs, output))
             else:
                 test_cases.append(SolutionTestCase(name, test_case['input'], test_case['output']))
         return test_cases
-
-    @staticmethod
-    def read_tags() -> list:
-        with open("readme.md", encoding="utf-8") as f:
-            text = f.read()
-            tags = text.splitlines()[-1]
-        return ast.literal_eval(tags)
 
 
 class ApproximateSolutionTest(BaseSolutionTest):

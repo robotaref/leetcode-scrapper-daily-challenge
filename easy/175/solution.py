@@ -5,7 +5,10 @@ import pandas as pd
 
 class Solution:
 	def combine_two_tables(self, person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFrame:
-		return pd.DataFrame([])
+		result = person.merge(address, on="personId", how="outer")
+		result = result.drop(columns=["personId", "addressId"]).dropna(subset=["lastName"])
+
+		return result
 
 
 class TestableSolution(Solution):

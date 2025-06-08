@@ -5,12 +5,11 @@ import re
 
 import markdownify
 import requests
-import pandas as pd
 
-from io import StringIO
-from textwrap import indent
-from typing import Union, Any, Dict
+
+from typing import Union
 from .question import Question
+from .utils import open_json, json2dataframe, str2dataframe, wrap_in_solution_class, parse_output
 
 IMPORT_TEXT = "from testing.solution_test import BaseSolutionTest\n\n\n"
 
@@ -41,130 +40,9 @@ class Scrapper:
         # scrape outputs based on topic tags
         if "database" in self.question.topic_tags:
             output = re.findall(r'<strong>Output:</strong> \n(.*?)\n<strong>Explanation:</strong>', content, re.S)
-            return [self.str2dataframe(case) for case in output]
+            return [str2dataframe(case) for case in output]
         else:
             return re.findall(r"(?<=<strong>Output:</strong> )(.*)(?=\n)", content)
-
-    @staticmethod
-    def open_json(data_file_name: str) -> dict:
-        data_file = f"scrapper/assets/{data_file_name}.json"
-
-        f = open(data_file)
-        data = json.load(f)
-        return data
-
-    @staticmethod
-    def parse_output(output: str) -> Any:
-        if output == "true":
-            return True
-        if output == "false":
-            return False
-
-        output = output.strip('<span class="example-io">')
-        output = output.strip('</span></p>')
-        output = output.replace("&quot;", '"')
-        try:
-            return ast.literal_eval(output)
-        except Exception as e:
-            print(f"could not parse output {output}, error: {repr(e)}")
-            return output
-
-    @staticmethod
-    def str2dataframe(table_text: str) -> pd.DataFrame:
-        data_lines = [
-            line for line in table_text.strip().splitlines()
-            if '|' in line and not line.lstrip().startswith('+')
-        ]
-
-        if not data_lines:
-            raise ValueError("No table rows detected – check the input string.")
-
-        csv_like = "\n".join(data_lines)
-        df = pd.read_csv(
-            StringIO(csv_like),
-            sep=r"\|",  # split on pipe characters
-            engine="python",
-            skipinitialspace=True  # trim spaces after each “|”
-        )
-
-        df = df.loc[:, df.columns.str.strip() != ""]  # drop leading |
-        df = df.loc[:, ~df.columns.str.startswith("Unnamed")]  # drop trailing |
-        df.columns = df.columns.str.strip()
-        df = df.apply(lambda col: col.str.strip() if col.dtype == "object" else col)
-
-        null_tokens = {"null", "Null", "<NA>", "<na>", "NaN", "nan"}
-        df = df.replace({tok: None for tok in null_tokens})  # literal strings
-        df = df.where(df.notna(), None)  # actual NaN/NA
-
-        return df
-
-    @staticmethod
-    def json2dataframe(json_string: str) -> Dict[str, pd.DataFrame]:
-        data = json.loads(json_string)
-
-        headers: dict[str, list[str]] = data["headers"]
-        rows: dict[str, list[list]] = data["rows"]
-
-        dfs: Dict[str, pd.DataFrame] = {}
-
-        for table_name, cols in headers.items():
-            table_rows = rows.get(table_name, [])
-            if any(len(r) != len(cols) for r in table_rows):
-                raise ValueError(
-                    f"Row length mismatch detected for table '{table_name}'."
-                )
-
-            df = pd.DataFrame(table_rows, columns=cols)
-            df.columns = df.columns.str.strip()
-            df = df.apply(lambda col: col.str.strip() if col.dtype == "object" else col)
-
-            null_tokens = {"null", "Null", "<NA>", "<na>", "NaN", "nan"}
-            df = df.replace({tok: None for tok in null_tokens})  # literal strings
-            df = df.where(df.notna(), None)  # actual NaN/NA
-
-            dfs[table_name.lower()] = df
-
-        return dfs
-
-    @staticmethod
-    def wrap_in_solution_class(method_str: str, decorator: str = '@staticmethod') -> str:
-        lines = method_str.splitlines(keepends=True)
-        class_body = []
-        keep_lines = []
-        capturing = False
-
-        for ln in lines:
-            if ln.lstrip().startswith('def ') and not ln.startswith((' ', '\t')):
-                # ── entering a top-level function ───────────────────────────────
-                capturing = True
-                header, rest = ln.lstrip(), ''
-                if ':' in header:  # split header/body boundary
-                    header, rest = header.split(':', 1)
-                    rest = ':' + rest
-                # add 'self' to the arg list if it's not there already
-                open_paren = header.find('(')
-                close_paren = header.find(')', open_paren)
-                params = header[open_paren + 1: close_paren].strip()
-                if not params.startswith('self'):
-                    params = ('self, ' + params) if params else 'self'
-                header = header[:open_paren + 1] + params + header[close_paren:]
-                class_body.append(indent(header + rest, '\t'))
-            elif capturing:
-                if ln.startswith((' ', '\t')) or ln.strip() == '':
-                    # still inside that function’s body
-                    class_body.append('\t\t')
-                else:
-                    # ── left the function ───────────────────────────────────────
-                    capturing = False
-                    keep_lines.append(ln)
-            else:
-                keep_lines.append(ln)
-
-        wrapped_class = (
-            '\n\nclass Solution:\n' + ''.join(class_body or ['    pass\n'])
-            if class_body else ''
-        )
-        return ''.join(keep_lines).rstrip() + wrapped_class
 
 
 class QuestionScrapper(Scrapper):
@@ -174,7 +52,7 @@ class QuestionScrapper(Scrapper):
         self.base_test_text = BASE_TEST_TEXT
 
     def get_from_api(self, data_file_name: Union[str, dict]) -> dict:
-        data = self.open_json(data_file_name)
+        data = open_json(data_file_name)
         data["variables"]["titleSlug"] = self.question.slug
         return self.call(data)["data"]["question"]
 
@@ -217,14 +95,14 @@ class QuestionScrapper(Scrapper):
             if "database" in method_meta_data and method_meta_data["database"]:
                 # self.imports_text += "import pandas as pd\n\n\n"
                 for j, case in enumerate(case_split):
-                    t = self.json2dataframe(case)
+                    t = json2dataframe(case)
                     inputs[f"question_{i + 1}"] = {"input": t, "output": self.question.outputs[i]}
 
             elif "params" in method_meta_data:
                 for j, param in enumerate(method_meta_data["params"]):
                     t[param["name"]] = ast.literal_eval(case_split[j].replace("null", "None"))
                 try:
-                    inputs[f"question_{i + 1}"] = {"input": t, "output": self.parse_output(self.question.outputs[i])}
+                    inputs[f"question_{i + 1}"] = {"input": t, "output": parse_output(self.question.outputs[i])}
                 except ValueError as e:
                     print(f"'{self.question.outputs[i]}' can't be parsed with error {repr(e)}")
 
@@ -240,7 +118,7 @@ class QuestionScrapper(Scrapper):
                 self.question.set_editor_data(editor_data)
             elif row["lang"] == "Pandas":
                 editor_data = row["code"].replace("    ", "\t")
-                editor_data = self.imports_text + self.wrap_in_solution_class(
+                editor_data = self.imports_text + wrap_in_solution_class(
                     editor_data) + self.base_editor_text.format(
                     function_name=self.question.main_method) + self.base_test_text
                 self.question.set_editor_data(editor_data)
@@ -300,7 +178,7 @@ class QuestionScrapper(Scrapper):
 
 class DailyChallengeScrapper(QuestionScrapper):
     def get_from_api(self, data_file_name: Union[str, dict]) -> dict:
-        data = self.open_json(data_file_name)
+        data = open_json(data_file_name)
         if data_file_name == "questionOfToday":
             return self.call(data)
         else:

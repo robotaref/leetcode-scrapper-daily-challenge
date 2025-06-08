@@ -14,13 +14,13 @@ This project provides a simple Python-based toolset to scrape LeetCode problems 
 
 No more switching tabs. No more copy-pasting. Just focus on solving problems locally with your favorite tools and editor.
 
-⚙️ Features
-✅ Get Daily Challenge problem automatically < br / >
-✅ Get any problem by slug (e.g. "two-sum", "longest-palindromic-substring") < br / >
-✅ Save question, description, test cases, and starter code < br / >
-✅ Work offline and test locally < br / >
-✅ Build a local bank of solutions < br / >
-✅ Fast and lightweight (uses requests + simple parsing) < br / >
+⚙️ Features<br/>
+✅ Get Daily Challenge problem automatically <br/>
+✅ Get any problem by slug (e.g. "two-sum", "longest-palindromic-substring") <br/>
+✅ Save question, description, test cases, and starter code <br/>
+✅ Work offline and test locally <br/>
+✅ Build a local bank of solutions <br/>
+✅ Fast and lightweight (uses requests + simple parsing) <br/>
 
 📚 Why I Built This
 As a regular LeetCoder, I wanted a smoother workflow:

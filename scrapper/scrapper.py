@@ -39,7 +39,7 @@ class Scrapper:
     def content2output(self, content: str) -> Union[list, dict]:
         # scrape outputs based on topic tags
         if "database" in self.question.topic_tags:
-            output = re.findall(r'<strong>Output:</strong> \n(.*?)\n<strong>Explanation:</strong>', content, re.S)
+            output = re.findall(r'<strong>Output:</strong> \n(.*?)\n<', content, re.S)
             return [str2dataframe(case) for case in output]
         else:
             return re.findall(r"(?<=<strong>Output:</strong> )(.*)(?=\n)", content)
@@ -91,14 +91,13 @@ class QuestionScrapper(Scrapper):
         inputs = {}
         for i, case in enumerate(example_testcase_list_):
             t = {}
-            case_split = case.split("\n")
+
             if "database" in method_meta_data and method_meta_data["database"]:
-                # self.imports_text += "import pandas as pd\n\n\n"
-                for j, case in enumerate(case_split):
-                    t = json2dataframe(case)
-                    inputs[f"question_{i + 1}"] = {"input": t, "output": self.question.outputs[i]}
+                t = json2dataframe(case)
+                inputs[f"question_{i + 1}"] = {"input": t, "output": self.question.outputs[i]}
 
             elif "params" in method_meta_data:
+                case_split = case.split("\n")
                 for j, param in enumerate(method_meta_data["params"]):
                     t[param["name"]] = ast.literal_eval(case_split[j].replace("null", "None"))
                 try:

@@ -1,0 +1,1 @@
+{"question_1": {"input": {"words": ["leet", "code"], "x": "e"}, "output": [0, 1]}, "question_2": {"input": {"words": ["abc", "bcd", "aaaa", "cbc"], "x": "a"}, "output": [0, 2]}, "question_3": {"input": {"words": ["abc", "bcd", "aaaa", "cbc"], "x": "z"}, "output": []}}

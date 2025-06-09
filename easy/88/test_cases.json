@@ -1,0 +1,1 @@
+{"question_1": {"input": {"nums1": [1, 2, 3, 0, 0, 0], "m": 3, "nums2": [2, 5, 6], "n": 3}, "output": [1, 2, 2, 3, 5, 6]}, "question_2": {"input": {"nums1": [1], "m": 1, "nums2": [], "n": 0}, "output": [1]}, "question_3": {"input": {"nums1": [0], "m": 0, "nums2": [1], "n": 1}, "output": [1]}}

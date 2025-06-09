@@ -1,6 +1,46 @@
-This repo is created for daily challenges of [LeetCode](https://leetcode.com/), starting from April 1, 2023, mostly with `python3`.
+🐍 [LeetCode](https://leetcode.com/) Scraper & Local Debug Tool
+Easily fetch LeetCode problems for offline practice, local testing, and building your personal solution bank.
 
-_IMPORTANT NOTICE_: some codes are gathered from internet and not all of them are not my original work.
+🚀 Project Overview
+This project provides a simple Python-based toolset to scrape LeetCode problems and make them available offline. It helps LeetCoders and competitive programmers streamline their workflow:
+
+✨ Fetch the Daily Challenge problem.
+
+🔍 Fetch any problem by its slug (URL-friendly name).
+
+💻 Automatically save the question description, code template, and test cases for local testing and debugging.
+
+🗂️ Build your own bank of solutions over time.
+
+No more switching tabs. No more copy-pasting. Just focus on solving problems locally with your favorite tools and editor.
+
+⚙️ Features<br/>
+✅ Get Daily Challenge problem automatically <br/>
+✅ Get any problem by slug (e.g. "two-sum", "longest-palindromic-substring") <br/>
+✅ Save question, description, test cases, and starter code <br/>
+✅ Work offline and test locally <br/>
+✅ Build a local bank of solutions <br/>
+✅ Fast and lightweight (uses requests + simple parsing) <br/>
+
+📚 Why I Built This
+As a regular LeetCoder, I wanted a smoother workflow:
+
+Avoid browser distractions
+
+Easily test edge cases offline
+
+Version control my solutions in Git
+
+Gradually build a personal solution bank for revision and reference
+
+I hope this helps other programmers who want to level up their algorithm skills!
+
+Contributions are welcome (scrapper, test suite, question bank, etc ).
+
+> [!NOTE]
+> Some codes are gathered from internet and not all of them are not my original work.
+
+📦 How to Use
 
 ### Getting Questions
 
@@ -13,13 +53,21 @@ pip install -r requirements.txt -U
 To get any question, with problem and description, use download command.
 
 ```shell
-python main.py -d True 
+python main.py -d
+```
+or
+```shell
+python main.py --daily
 ```
 
 and to get any other, use:
 
 ```shell
 python main.py -s `QUESTION_SLUG`
+```
+or
+```shell
+python main.py --slug `QUESTION_SLUG`
 ```
 
 `QUESTION_SLUG` can be extracted from any problem url, which looks like this:
@@ -67,3 +115,9 @@ schema:
   }
 }
 ```
+
+<!-- leetcode scraper, leetcode offline practice, leetcode cli, leetcode downloader, leetcode python tool,
+fetch leetcode questions, local leetcode testing, competitive programming tools, leetcode daily challenge fetcher,
+leetcode solution bank -->
+
+
